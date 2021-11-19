@@ -1,19 +1,20 @@
-from django.db             import models
-from django.contrib.gis.db import models as geomodels
+from django.contrib.gis.db import models
 
 from core.models           import TimeStampModel
 
 class Area(TimeStampModel) :
-    area_center   = geomodels.PointField()
-    area_boundary = geomodels.PolygonField()
-    area_coords   = geomodels.MultiPointField()
+    area_center   = models.PointField()
+    area_boundary = models.PolygonField()
+    area_coords   = models.MultiPointField()
+    basic_fee     = models.PositiveIntegerField()
+    minute_fee    = models.PositiveIntegerField()
     
     class Meta :
         db_table = 'areas'
 
 class ParkingZone(TimeStampModel) :
     area           = models.ForeignKey('Area', on_delete=models.CASCADE)
-    parking_center = geomodels.PointField()
+    parking_center = models.PointField()
     parking_radius = models.DecimalField(max_digits=20, decimal_places=10)
     
     class Meta :
@@ -21,8 +22,8 @@ class ParkingZone(TimeStampModel) :
     
 class ForbiddenArea(TimeStampModel) :
     area               = models.ForeignKey('Area', on_delete=models.CASCADE)
-    forbidden_boundary = geomodels.PolygonField()
-    forbidden_coords   = geomodels.MultiPointField()
+    forbidden_boundary = models.PolygonField()
+    forbidden_coords   = models.MultiPointField()
     
     class Meta :
         db_table = 'forbidden_areas'
@@ -41,8 +42,8 @@ class KickBoard(TimeStampModel):
 class Service(TimeStampModel):
     start_time = models.DateTimeField()
     end_time   = models.DateTimeField()
-    start_area = geomodels.PointField()
-    end_area   = geomodels.PointField()
+    start_area = models.PointField()
+    end_area   = models.PointField()
     fee        = models.PositiveIntegerField()
     user       = models.ForeignKey('users.User', on_delete = models.CASCADE)
     kickborad  = models.ForeignKey('Kickboard', on_delete = models.CASCADE)
