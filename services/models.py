@@ -42,11 +42,10 @@ class KickBoard(TimeStampModel):
 class Service(TimeStampModel):
     start_time = models.DateTimeField()
     end_time   = models.DateTimeField()
-    start_area = models.PointField()
     end_area   = models.PointField()
     fee        = models.PositiveIntegerField()
     user       = models.ForeignKey('users.User', on_delete = models.CASCADE)
-    kickborad  = models.ForeignKey('Kickboard', on_delete = models.CASCADE)
+    kickboard  = models.ForeignKey('Kickboard', on_delete = models.CASCADE)
 
     class Meta:
         db_table = 'services'
