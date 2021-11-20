@@ -7,18 +7,19 @@ from django.views            import View
 from django.http.response    import JsonResponse
 from django.contrib.gis.geos import Point
 
-from services.models         import KickBoard, Service
-from users.models            import User
+from services.models         import KickBoard
+from users.utils             import login_decorator
 from services.calculator     import CouponCalculation, DiscountCalculation, PenaltyCalculation
 from services.discount       import *
 from services.penalty        import *
 from services.coupon         import *
 
 class CalculateView(View):
+    @login_decorator
     def post(self, request):
         try:
             time_format    = '%Y-%m-%d %H:%M:%S'
-            user           = User.objects.get(id = 1)
+            user           = request.user
             data           = json.loads(request.body)
             kickboard_name = data['kickboard_name']
             end_lat        = data['end_lat']
@@ -29,14 +30,14 @@ class CalculateView(View):
             
             kickboard      = KickBoard.objects.select_related('area').get(name = kickboard_name)
             area           = kickboard.area
-            use_time       = (end_at - start_at).seconds / 60
+            use_time       = (end_at - start_at).days * 1440 + (end_at - start_at).seconds / 60
             use_fee        = area.basic_fee + area.minute_fee * use_time
 
             # 적용할 할인율 리스트
-            discounts = [ParkingzoneDiscount(area, end_point, use_fee), LuckykicboardDiscount(area, end_point, use_fee, kickboard)]
+            discounts = [ParkingzoneDiscount(area, end_point), LuckykicboardDiscount(area, end_point, kickboard), WorkingtimeDiscount(start_at), WeekendDiscount(start_at)]
 
             # 적용할 쿠폰 리스트
-            coupons   = [LatestuseCoupon(area, user, start_at), FirstuseCoupon(user)]
+            coupons   = [LatestuseCoupon(area, user, start_at), FirstuseCoupon(user), ChristmasCounpon(start_at)]
 
             # 적용할 패널티 리스트
             penalties = [OutsidePenalty(area, end_point), ForbiddenAreaPenalty(area, end_point)]
