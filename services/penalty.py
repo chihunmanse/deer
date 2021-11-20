@@ -1,6 +1,6 @@
 from services.models import ForbiddenArea
 
-# 서비스 지역외 반납 패널티
+# 서비스지역외 반납 패널티
 class OutsidePenalty:
     def __init__(self, area, end_point):
         self.area              = area

@@ -1,4 +1,4 @@
-# 총 할인액 계산
+# 총 할인율 계산
 class DiscountCalculation:
     def __init__(self, discounts):
         self.discount  = 1
@@ -22,7 +22,7 @@ class CouponCalculation:
 
         return self.coupon
 
-# 총 벌금액 계산
+# 총 패널티 계산
 class PenaltyCalculation:
     def __init__(self, penalties):
         self.penalty   = 0
