@@ -132,6 +132,8 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 
 ### API 테스트 : https://www.postman.com/cloudy-resonance-766003/workspace/deer
 
+### API 명세서 : https://documenter.getpostman.com/view/17663987/UVJWqfVJ
+
 ### 기본 주소는 배포주소로 되어 있으며, 콜렉션 fork 후 테스트 부탁드립니다.
 
 ### Data Reference
@@ -174,7 +176,6 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 
 온천동 지역 외 위도 경도 : 35.198830, 129.059440
 
-### API 명세서 : https://documenter.getpostman.com/view/17663987/UVJWqfVJ
 
 ------
 
