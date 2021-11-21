@@ -174,7 +174,7 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 
 온천동 지역 외 위도 경도 : 35.198830, 129.059440
 
-### API 명세서 : 
+### API 명세서 : https://documenter.getpostman.com/view/17663987/UVJWqfVJ
 
 ------
 
