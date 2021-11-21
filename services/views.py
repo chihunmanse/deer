@@ -33,7 +33,7 @@ class CalculateView(View):
             use_time       = (end_at - start_at).days * 1440 + (end_at - start_at).seconds / 60
             use_fee        = area.basic_fee + area.minute_fee * use_time
 
-            # 적용할 할인율 리스트
+            # 적용할 할인(율) 리스트
             discounts = [ParkingzoneDiscount(area, end_point), LuckykicboardDiscount(area, end_point, kickboard), WorkingtimeDiscount(start_at), WeekendDiscount(start_at)]
 
             # 적용할 쿠폰 리스트
