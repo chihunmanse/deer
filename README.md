@@ -134,6 +134,42 @@ forbidden_area_coords (반납금지구역의 경계를 표시하는 위도, 경�
 
 ### 기본 주소는 배포주소로 되어 있으며, 콜렉션 fork 후 테스트 부탁드립니다.
 
+### Data Reference
+
+유저 정보
+
+1. phone_number = '01011111111' / password = '1234' (이용내역 존재해서 첫이용 쿠폰 적용되지 않음)  
+
+   토큰 = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.8SfW-rdiggsjQ91oOb9hS-7tub81_UL9oHv-qgcHE5U
+
+2. phone_number = '01022222222' / password = '1234'
+
+   토큰 = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6Mn0.eVdLVy6A6u7U2mQui17ZcVDK5rovEcvcFpcw-fBNi3M
+
+
+
+군자동 요금 : 기본 요금 1000원 / 분당 요금 200원
+
+군자동에 속한 킥보드 이름 정보 : '썬더볼트', '씽씽이', '붕붕이 (이벤트 중인 킥보드)',  
+
+군자동 지역 반납 위도 경도 : 37.556251, 127.074597
+
+군자동 파킹존 반납 위도 경도 : 37.555379, 127.075750 / 37.550365, 127.071446
+
+군자동 반납금지구역 위도 경도 : 37.551319, 127.074239
+
+
+
+온천동 요금 : 기본 요금 500원 / 분당 요금 100원
+
+온천동에 속한 킥보드 이름 정보 : "방방이", '슝슝이', '독수리'
+
+온천동 지역 반납 위도 경도 : 35.21324123862374, 129.0677494260041
+
+온천동 파킹존 반납 위도 경도 : 35.205903, 129.068146 / 35.207491, 129.070197
+
+온천동 반납금지구역 위도 경도 : 35.212870, 129.061417
+
 ### API 명세서 : 
 
 ------
@@ -214,31 +250,31 @@ GDAL 라이브러리를 사용하여 django orm을 통해 Polygon 및 Point 데�
 
 조건은 크게 벌금과 할인으로 나누고 할인 안에서는 요율로 적용되는 할인과 쿠폰 할인으로 나누어 관리하기로 했습니다.
 
-**penalty.py**
+#### **penalty.py**
 
 ![](https://user-images.githubusercontent.com/61782539/142761041-d7fffe92-e1c1-4ec3-aadc-40ea4437f4e5.png)
 
 penalty.py 파일에는 벌금 정책들이 각각의 class로 작성되어 관리됩니다.
 
-**discount.py**
+#### **discount.py**
 
 ![](https://user-images.githubusercontent.com/61782539/142761130-36e5084d-7978-47d1-87a0-8da4270d6776.png)
 
 discount.py 파일에는 요율로 적용되는 할인 정책들이 각각의 class로 작성되어 관리됩니다.
 
-**coupon.py**
+#### **coupon.py**
 
 ![](https://user-images.githubusercontent.com/61782539/142761226-c77fd07d-121c-4f75-868b-0e36482e3c9d.png)
 
 coupon.py 파일에는 쿠폰 할인 정책들이 각각의 class로 작성되어 관리됩니다.
 
-**calculator.py**
+#### **calculator.py**
 
 ![](https://user-images.githubusercontent.com/61782539/142761343-8b762e75-f6da-4cb3-830b-34ae2aff7557.png)
 
 calculator.py 파일에는 적용된 벌금, 할인, 쿠폰 조건들의 총 금액을 계산해주는 class들을 작성하였습니다.
 
-**views.py**
+#### **views.py**
 
 ![](https://user-images.githubusercontent.com/61782539/142761649-e21bf2bd-6d95-4f0f-a5be-007778f89965.png)
 
