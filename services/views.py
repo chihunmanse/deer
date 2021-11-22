@@ -45,6 +45,10 @@ class CalculateView(View):
             discount  = DiscountCalculation(discounts).calculate_discount()
             penalty   = PenaltyCalculation(penalties).calculate_penalty()
             coupon    = CouponCalculation(coupons).calculate_coupon()
+
+            discount_names = DiscountCalculation(discounts).get_discount_name()
+            penalty_names  = PenaltyCalculation(penalties).get_penalty_name()
+            coupon_names   = CouponCalculation(coupons).get_coupon_name()
             
             total_fee = round(use_fee * discount - coupon + penalty)
 
@@ -60,7 +64,12 @@ class CalculateView(View):
                 kickboard  = kickboard,
             )
 
-            return JsonResponse({'total_fee' : total_fee}, status = 201)
+            return JsonResponse({
+                'total_fee'      : total_fee,
+                'discount_names' : discount_names,
+                'penalty_names'  : penalty_names,
+                'coupon_names'   : coupon_names
+                }, status = 201)
         
         except ValueError:
             return JsonResponse({'message' : 'DOES_NOT_MATCH_TIME_FORMAT'}, status = 400)

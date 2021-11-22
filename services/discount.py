@@ -3,10 +3,11 @@ from services.models import ParkingZone
 # 파킹존 반납 할인 - 30% 
 class ParkingzoneDiscount:
     def __init__(self, area, end_point):
+        self.name      = '파킹존 반납 30% 할인'
         self.area      = area
         self.end_point = end_point
         self.discount  = 1
-        
+                
     def calculate_discount(self):
         parkingzones = ParkingZone.objects.filter(area = self.area)
 
@@ -19,10 +20,14 @@ class ParkingzoneDiscount:
                self.discount = 0.7
         
         return self.discount
+    
+    def get_discount_name(self):
+        return self.name
 
 # 특정 킥보드 파킹존 반납 할인 - 100%
 class LuckykicboardDiscount:
     def __init__(self, area, end_point, kickboard):
+        self.name      = '특정 킥보드 파킹본 반납 100% 할인'
         self.area      = area
         self.end_point = end_point
         self.kickboard = kickboard
@@ -41,10 +46,14 @@ class LuckykicboardDiscount:
                     self.discount = 0
         
         return self.discount
+    
+    def get_discount_name(self):
+        return self.name
 
 # 출근시간대 대여 할인 - 10%
 class WorkingtimeDiscount:
     def __init__(self, start_at):
+        self.name       = '출근시간대 대여 10% 할인'
         self.start_hour = int(start_at.strftime('%H'))
         self.discount   = 1
         
@@ -53,10 +62,14 @@ class WorkingtimeDiscount:
             self.discount = 0.9
         
         return self.discount
+    
+    def get_discount_name(self):
+        return self.name
 
 # 주말 21시 이후 할인 - 10%
 class WeekendDiscount:
     def __init__(self, start_at):
+        self.name       = '주말 21시 이후 10% 할인'
         self.start_day  = start_at.strftime('%A')
         self.start_hour = int(start_at.strftime('%H'))
         self.discount   = 1
@@ -66,3 +79,6 @@ class WeekendDiscount:
             self.discount = 0.9
         
         return self.discount
+    
+    def get_discount_name(self):
+        return self.name
