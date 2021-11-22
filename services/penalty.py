@@ -3,6 +3,7 @@ from services.models import ForbiddenArea
 # 서비스지역외 반납 패널티
 class OutsidePenalty:
     def __init__(self, area, end_point):
+        self.name              = '서비스지역외 반납 패널티'
         self.area              = area
         self.end_point         = end_point
         self.penalty           = 0
@@ -14,10 +15,14 @@ class OutsidePenalty:
             self.penalty = distance * self.PENAlTY_PER_METER
 
         return self.penalty
+    
+    def get_penalty_name(self):
+        return self.name
 
-# 반납금지지역 반납 패널티
+# 반납금지구역 반납 패널티
 class ForbiddenAreaPenalty:
     def __init__(self, area, end_point):
+        self.name              = '반납금지구역 반납 패널티'
         self.area              = area
         self.end_point         = end_point
         self.penalty           = 0
@@ -28,3 +33,6 @@ class ForbiddenAreaPenalty:
             self.penalty = self.FORBIDDEN_PANALTY
         
         return self.penalty
+    
+    def get_penalty_name(self):
+        return self.name

@@ -3,6 +3,7 @@ from services.models import Service
 # 30분 이내 재대여 기본요금 쿠폰
 class LatestuseCoupon:
     def __init__(self, area, user, start_at):
+        self.name     = '30분 이내 재대여 쿠폰'
         self.area     = area
         self.user     = user
         self.start_at = start_at
@@ -19,10 +20,14 @@ class LatestuseCoupon:
                 self.coupon = self.area.basic_fee
         
         return self.coupon
+    
+    def get_coupon_name(self):
+        return self.name
 
 # 첫 이용시 1000원 쿠폰
 class FirstuseCoupon:
     def __init__(self, user):
+        self.name   = '첫 이용 쿠폰'
         self.user   = user
         self.coupon = 0
 
@@ -31,10 +36,14 @@ class FirstuseCoupon:
             self.coupon = 1000
         
         return self.coupon
+    
+    def get_coupon_name(self):
+        return self.name
 
 # 크리스마스에 이용시 1000원 쿠폰
 class ChristmasCounpon:
     def __init__(self, start_at):
+        self.name      = '크리스마스 쿠폰'
         self.start_day = start_at.strftime('%m-%d')
         self.coupon    = 0
 
@@ -43,3 +52,6 @@ class ChristmasCounpon:
             self.coupon = 1000
         
         return self.coupon
+    
+    def get_coupon_name(self):
+        return self.name

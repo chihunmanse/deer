@@ -70,7 +70,10 @@ class CalculateTest(TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json(), 
             {
-                'total_fee' : 6000
+                'total_fee' : 6000,
+                'discount_names' : [],
+                'penalty_names'  : [],
+                'coupon_names'   : ['첫 이용 쿠폰']
             }
         )
 
